@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Frases Motivacionales - BIPA</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            /* Fondo texturizado suave y elegante sin imágenes (CSS puro con patrón de grano/mármol sutil) */
+            background-color: #f4efe9;
+            background-image: 
+                radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.6) 0%, rgba(225, 218, 208, 0.4) 100%),
+                linear-gradient(0deg, rgba(238, 233, 225, 0.5) 0%, rgba(246, 243, 239, 0.5) 100%);
+            font-family: 'Georgia', serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+            height: 100dvh;
+            margin: 0;
+            text-align: center;
+            padding: 35px 20px;
+            overflow: hidden;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            max-width: 380px;
+            width: 100%;
+        }
+
+        /* Estilos del Logo real */
+        .logo-seccion {
+            margin-bottom: 25px;
+        }
+
+        .logo-img {
+            max-width: 160px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Caja de la Frase */
+        .frase-card {
+            padding: 0 10px;
+            margin-bottom: 20px;
+            min-height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .frase {
+            font-size: 17px;
+            color: #524339;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Botón táctil optimizado para móviles */
+        .btn-container {
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: #728254; /* Tono verde oliva corporativo */
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-family: 'Georgia', serif;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(114, 130, 84, 0.25);
+            transition: transform 0.1s ease, background-color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+            background-color: #5d6c42;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-principal">
+        <!-- Logo real de BIPA -->
+        <div class="logo-seccion">
+            <img src="logo-bipa.png" alt="Logo BIPA" class="logo-img">
+        </div>
+
+        <!-- Contenedor dinámico de frases -->
+        <div class="frase-card">
+            <div id="frase-box" class="frase">Cargando inspiración...</div>
+        </div>
+    </div>
+
+    <!-- Botón inferior para generar aleatorias -->
+    <div class="btn-container">
+        <button class="btn" onclick="generarFrase()">✨ Ver otra frase</button>
+    </div>
+
+    <script>
+        const frases = [
+            "El único modo de hacer un gran trabajo es amar lo que haces. — Steve Jobs",
+            "No cuentes los días, haz que los días cuenten. — Muhammad Ali",
+            "Tu actitud, no tu aptitud, determinará tu altitud. — Zig Ziglar",
+            "El optimismo es la fe que conduce al logro. — Helen Keller",
+            "Haz hoy lo que otros no quieren, haz mañana lo que otros no pueden. — Jerry Rice",
+            "La felicidad no es la estación de llegada, sino una manera de viajar. — Margaret Lee Runbeck",
+            "Si puedes imaginarlo, puedes lograrlo; si puedes soñarlo, puedes convertirlo en realidad. — William Arthur Ward",
+            "La mejor manera de predecir el futuro es creándolo. — Peter Drucker",
+            "Convierte tus obstáculos en oportunidades y tus problemas en posibilidades. — Roy T. Bennett",
+            "Cada día es una nueva oportunidad para cambiar tu vida. — Bob Marley",
+            "El éxito no es la clave de la felicidad. La felicidad es la clave del éxito. — Albert Schweitzer",
+            "El secreto del éxito en la vida de un hombre está en prepararse para aprovechar la ocasión cuando se presente. — Benjamin Disraeli",
+            "El fracaso es la oportunidad de empezar de nuevo, esta vez con más inteligencia. — Henry Ford",
+            "No te detengas cuando estés cansado, detente cuando hayas terminado. — David Goggins",
+            "El éxito es la suma de pequeños esfuerzos repetidos día tras día. — Robert Collier",
+            "La perseverancia es caer 19 veces y levantarse 20. — Proverbio japonés",
+            "Los ganadores nunca se rinden y los que se rinden nunca ganan. — Vince Lombardi",
+            "El trabajo duro vence al talento cuando el talento no trabaja duro. — Tim Notke",
+            "No esperes el momento oportuno, créalo. — George Bernard Shaw",
+            "El único lugar donde el éxito viene antes que el trabajo es en el diccionario. — Vidal Sassoon",
+            "Menos excusas, más resultados. — Brian Tracy",
+            "La concentración y la constancia son las llaves del éxito. — Bruce Lee",
+            "Empieza haciendo lo necesario, después lo posible, y de repente estarás haciendo lo imposible. — San Francisco de Asís",
+            "La disciplina es el puente entre las metas y los logros. — Jim Rohn",
+            "No dejes para mañana lo que puedas hacer hoy. — Benjamin Franklin",
+            "El secreto para salir adelante es comenzar. — Mark Twain",
+            "Enfócate en ser productivo, no en estar ocupado. — Tim Ferriss",
+            "La eficiencia es hacer las cosas bien; la eficacia es hacer las cosas correctas. — Peter Drucker",
+            "Organízate, prioriza y conquista tu día. — Dale Carnegie",
+            "Un objetivo es un sueño con fecha límite. — Napoleon Hill",
+            "Si quieres ir rápido, ve solo. Si quieres llegar lejos, ve acompañado. — Proverbio africano",
+            "Un líder es alguien que conoce el camino, lo anda y lo muestra. — John C. Maxwell",
+            "La innovación distingue a un líder de un seguidor. — Steve Jobs",
+            "El talento gana partidos, pero el trabajo en equipo y la inteligencia ganan campeonatos. — Michael Jordan",
+            "Rodéate de personas que te fuercen a ser mejor. — Oprah Winfrey",
+            "Ninguno de nosotros es tan buena como todos nosotros juntos. — Ray Kroc",
+            "La verdadera medida de un líder es el éxito de su equipo. — Brian Tracy",
+            "Un buen líder inspira a la gente a tener confianza en sí misma; un gran líder inspira a la gente a tener confianza en el líder. — Eleanor Roosevelt",
+            "La cooperación es la convicción plena de que nadie puede llegar si no llegan todos. — Virginia Burden",
+            "El liderazgo no se trata de títulos, puestos o jerarquías, sino de impacto, influencia e inspiración. — Robin Sharma",
+            "El mayor riesgo es no tomar ninguno. — Mark Zuckerberg",
+            "La creatividad es la inteligencia divirtiéndose. — Albert Einstein",
+            "Si no cometes errores, es porque no estás tomando suficientes riesgos. — John Wooden",
+            "La innovación no se trata de decir que sí a todo, sino de decir que no a todas las características excepto a las más importantes. — Steve Jobs",
+            "No tengas miedo de renunciar a lo bueno para perseguir lo grandioso. — John D. Rockefeller",
+            "Quien no arriesga no gana. — Erasmo de Róterdam",
+            "Los errores son la prueba de que estás intentando algo nuevo. — Rita Mae Brown",
+            "Piensa fuera de la caja, actúa dentro de la realidad, pero sueña sin límites. — Ken Robinson",
+            "El cambio es inevitable, el crecimiento es opcional. — John C. Maxwell",
+            "La mejor forma de inventar el futuro es reinventar el presente. — Alan Kay",
+            "Conviértete en la mejor versión de ti mismo cada día. — Jordan Peterson",
+            "El crecimiento y la comodidad no pueden coexistir. — Ginni Rometty",
+            "Lo que haces hoy habla mucho más alto que lo que dices. — Ralph Waldo Emerson",
+            "No midas tu éxito por lo que has logrado, sino por los obstáculos que has superado. — Booker T. Washington",
+            "Cada experto fue una vez un principiante. — Helen Hayes",
+            "Cree en ti mismo y todo será posible. — Roy T. Bennett",
+            "La educación es el arma más poderosa que puedes usar para cambiar el mundo. — Nelson Mandela",
+            "Tu potencial es ilimitado; explótalo. — Tony Robbins",
+            "El aprendizaje es un tesoro que seguirá a su dueño a todas partes. — Proverbio chino",
+            "Nunca eres demasiado viejo para fijar otra meta o para soñar un nuevo sueño. — C.S. Lewis",
+            "El trabajo llenará gran parte de tu vida, y la única forma de estar realmente satisfecho es hacer lo que crees que es un gran trabajo. — Steve Jobs",
+            "Encuentra un trabajo que te guste y no tendrás que trabajar ni un día más en tu vida. — Confucio",
+            "La pasión es la energía que te mueve; el propósito es la brújula que te guía. — Tony Robbins",
+            "Pon tu corazón, mente y alma incluso en tus actos más pequeños. Este es el secreto del éxito. — Swami Sivananda",
+            "Haz quod amas... Haz lo que amas y el éxito te seguirá de forma natural. — Oprah Winfrey",
+            "El entusiasmo mueve el mundo. — Arthur Balfour",
+            "Cuando tienes un propósito claro, los obstáculos se convierten en escalones. — Tony Robbins",
+            "Trabaja con pasión o no trabajes en absoluto. — Marc Anthony",
+            "El combustible de la creatividad es la curiosidad. — Elizabeth Gilbert",
+            "El sentido de la vida es encontrar tu don; el propósito de la vida es regalarlo. — Pablo Picasso",
+            "En medio de la dificultad se esconde la oportunidad. — Albert Einstein",
+            "No importa lo lento que vayas, siempre y cuando no te detengas. — Confucio",
+            "Las dificultades preparan a menudo a personas ordinarias para un destino extraordinario. — C.S. Lewis",
+            "Si pasas por un infierno, sigue caminando. — Winston Churchill",
+            "La tormenta hace que los árboles echen raíces más profundas. — Dolly Parton",
+            "Caer está permitido, levantarse es una obligación. — Eduardo Galeano",
+            "Un mar tranquilo nunca hizo un marinero experto. — Franklin D. Roosevelt",
+            "La resiliencia es aceptar tu nueva realidad, incluso cuando es peor que la de antes. — Elizabeth Edwards",
+            "Lo que no te mata, te hace más fuerte. — Friedrich Nietzsche",
+            "Cada golpe te acerca más al siguiente gran triunfo. — Babe Ruth",
+            "La acción es la clave fundamental de todo éxito. — Pablo Picasso",
+            "No esperes a que las condiciones sean perfectas para empezar; empezar hace que las condiciones sean perfectas. — Alan Cohen",
+            "Un viaje de mil millas comienza con un solo paso. — Lao Tsé",
+            "Toma la iniciativa; nadie más lo hará por ti. — Les Brown",
+            "Haz que suceda. — Richard Branson",
+            "El futuro depende de lo que hagas hoy. — Mahatma Gandhi",
+            "Muévete hacia adelante con confianza y valentía. — Paulo Coelho",
+            "La inspiración existe, pero tiene que encontrarte trabajando. — Pablo Picasso",
+            "El momento de actuar es ahora. — Martin Luther King Jr.",
+            "Da el primer paso con fe. No tienes que ver toda la escalera, solo da el primer paso. — Martin Luther King Jr.",
+            "Celebra tus pequeñas victorias; ellas te preparan para las grandes. — Tim Ferriss",
+            "El reconocimiento al esfuerzo es el mejor motor para continuar. — Dale Carnegie",
+            "Disfruta del proceso tanto como del resultado final. — Earl Nightingale",
+            "Cada meta alcanzada es el punto de partida para un nuevo reto. — John C. Maxwell",
+            "El trabajo bien hecho es su propia recompensa. — Aristóteles",
+            "Mira hacia atrás con orgullo por lo que has logrado y hacia adelante con emoción por lo que viene. — Tom Peters",
+            "La satisfacción de un trabajo bien hecho no tiene precio. — Michael Jordan",
+            "El éxito sabe mejor cuando se comparte con los demás. — Howard Schultz",
+            "Has llegado lejos, pero tu potencial aún no conoce límites. — Robin Sharma",
+            "¡Hoy es un gran día para triunfar! — Zig Ziglar"
+        ];
+
+        function generarFrase() {
+            const indiceAleatorio = Math.floor(Math.random() * frases.length);
+            const cajaFrase = document.getElementById("frase-box");
+            
+            cajaFrase.style.opacity = 0;
+            setTimeout(() => {
+                cajaFrase.innerText = frases[indiceAleatorio];
+                cajaFrase.style.opacity = 1;
+                cajaFrase.style.transition = "opacity 0.3s ease-in-out";
+            }, 150);
+        }
+
+        window.onload = generarFrase;
+    </script>
+</body>
+</html>
