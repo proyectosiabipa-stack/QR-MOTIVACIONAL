@@ -9,15 +9,12 @@
             box-sizing: border-box;
         }
         body {
-            /* Fondo texturizado suave y elegante sin imágenes (CSS puro con patrón de grano/mármol sutil) */
-            background-color: #f4efe9;
-            background-image: 
-                radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.6) 0%, rgba(225, 218, 208, 0.4) 100%),
-                linear-gradient(0deg, rgba(238, 233, 225, 0.5) 0%, rgba(246, 243, 239, 0.5) 100%);
+            /* Fondo blanco normal y limpio */
+            background-color: #ffffff;
             font-family: 'Georgia', serif;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             height: 100vh;
             height: 100dvh;
@@ -32,12 +29,11 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            flex: 1;
             max-width: 380px;
             width: 100%;
         }
 
-        /* Estilos del Logo real */
+        /* Estilos del Logo */
         .logo-seccion {
             margin-bottom: 25px;
         }
@@ -53,7 +49,6 @@
         /* Caja de la Frase */
         .frase-card {
             padding: 0 10px;
-            margin-bottom: 20px;
             min-height: 130px;
             display: flex;
             align-items: center;
@@ -66,33 +61,6 @@
             line-height: 1.6;
             font-style: italic;
         }
-
-        /* Botón táctil optimizado para móviles */
-        .btn-container {
-            width: 100%;
-            max-width: 300px;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            background-color: #728254; /* Tono verde oliva corporativo */
-            color: #ffffff;
-            border: none;
-            width: 100%;
-            padding: 14px;
-            border-radius: 30px;
-            font-size: 15px;
-            font-family: 'Georgia', serif;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(114, 130, 84, 0.25);
-            transition: transform 0.1s ease, background-color 0.2s;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .btn:active {
-            transform: scale(0.97);
-            background-color: #5d6c42;
-        }
     </style>
 </head>
 <body>
@@ -103,15 +71,10 @@
             <img src="logo-bipa.png" alt="Logo BIPA" class="logo-img">
         </div>
 
-        <!-- Contenedor dinámico de frases -->
+        <!-- Contenedor estático de la frase -->
         <div class="frase-card">
             <div id="frase-box" class="frase">Cargando inspiración...</div>
         </div>
-    </div>
-
-    <!-- Botón inferior para generar aleatorias -->
-    <div class="btn-container">
-        <button class="btn" onclick="generarFrase()">✨ Ver otra frase</button>
     </div>
 
     <script>
@@ -195,7 +158,7 @@
             "Un mar tranquilo nunca hizo un marinero experto. — Franklin D. Roosevelt",
             "La resiliencia es aceptar tu nueva realidad, incluso cuando es peor que la de antes. — Elizabeth Edwards",
             "Lo que no te mata, te hace más fuerte. — Friedrich Nietzsche",
-            "Cada golpe te acerca más al siguiente gran triunfo. — Babe Ruth",
+            "Cada golpe te cerca más al siguiente gran triunfo. — Babe Ruth",
             "La acción es la clave fundamental de todo éxito. — Pablo Picasso",
             "No esperes a que las condiciones sean perfectas para empezar; empezar hace que las condiciones sean perfectas. — Alan Cohen",
             "Un viaje de mil millas comienza con un solo paso. — Lao Tsé",
@@ -218,19 +181,14 @@
             "¡Hoy es un gran día para triunfar! — Zig Ziglar"
         ];
 
-        function generarFrase() {
+        // Selecciona una frase fija al azar cada vez que se carga la página
+        function mostrarFraseAleatoria() {
             const indiceAleatorio = Math.floor(Math.random() * frases.length);
             const cajaFrase = document.getElementById("frase-box");
-            
-            cajaFrase.style.opacity = 0;
-            setTimeout(() => {
-                cajaFrase.innerText = frases[indiceAleatorio];
-                cajaFrase.style.opacity = 1;
-                cajaFrase.style.transition = "opacity 0.3s ease-in-out";
-            }, 150);
+            cajaFrase.innerText = frases[indiceAleatorio];
         }
 
-        window.onload = generarFrase;
+        window.onload = mostrarFraseAleatoria;
     </script>
 </body>
 </html>
